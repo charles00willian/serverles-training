@@ -1,0 +1,29 @@
+org: charles00willian
+app: hello-sls
+service: data-base-events
+
+frameworkVersion: '2'
+
+
+provider:
+  name: aws
+  runtime: nodejs12.x
+  lambdaHashingVersion: 20201221
+  environment: 
+    DYNAMODB_TABLE: Heroes
+  iamRoleStatements:
+    - Effect: Allow
+      Action: 
+        - dynamodb:GetItem
+        - dynamodb:UpdateItem
+        - dynamodb:PutItem
+      Resource: "arn:aws:dynamodb:${self:provider.region}:*:table/${self:provider.environment.DYNAMODB_TABLE}"
+
+functions:
+  hero-insert:
+    handler: handler.heroesInsert
+    events:
+      - http: 
+          path: heroes
+          method: post
+          cors: true

@@ -38,8 +38,6 @@ class Handler {
       .map(({ Name }) => Name)
       .join(' and ');
 
-
-    console.log(workingItems);
     
     return { names, workingItems };
 
@@ -60,7 +58,7 @@ class Handler {
       const nameInPortuguese = texts[indexText];
       const confidence = workingItems[indexText].Confidence;
       finalText.push(
-        `${confidence.toFixed(2)}% de ser do tipo ${nameInPortuguese}\n`
+        `${confidence.toFixed(2)}% de ser do tipo ${nameInPortuguese},\n`
       )
     }
 
